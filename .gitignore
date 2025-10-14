@@ -1,0 +1,11 @@
+# Ignore OpenFOAM time directories
+[0-9]*
+processor*
+log.*
+*.log
+
+# Ignore temporary files
+*.nfs*
+*.tmp
+*.bak
+

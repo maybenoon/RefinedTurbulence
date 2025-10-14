@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# surfaceFeatures > surfacefeatures.log
+
+# Creates the computational domain
+blockMesh > blockMesh.log
+
+#Copies the initial conditions from an orig file to the one OpenFOAM reads
+cp -r 0.org 0
+cp 0/U_forw 0/U
+cp system/setFieldsDict_forw system/setFieldsDict
+cp constant/waveDict_curr_forw constant/waveDict
+
+# Creates the mesh
+snappyHexMesh -overwrite > snappyHexMesh.log
+
+renumberMesh -noFields -overwrite > renumberMesh.log
+
+checkMesh > checkMesh.log
+
+# Sets the initial conditions at time 0
+setFields > setFields.log
+
+# Solver used in this simulation
+olaFlow > olaFlow.log
+
+echo Simulation complete.
+
